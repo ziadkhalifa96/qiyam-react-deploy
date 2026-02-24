@@ -22,6 +22,9 @@ COPY --from=frontend /app/dist dist
 
 # env
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/backend
+
+CMD ["sh", "-c", "gunicorn backend.app:app --bind 0.0.0.0:$PORT"]
 
 # Railway provides $PORT at runtime
 CMD ["sh", "-c", "gunicorn backend.app:app --bind 0.0.0.0:$PORT"]
